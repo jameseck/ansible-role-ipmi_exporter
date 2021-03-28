@@ -1,0 +1,15 @@
+[Unit]
+Description=IPMI exporter
+After=network.target
+
+[Service]
+Type=simple
+User={{ ipmi_exporter_service_user }}
+Group={{ ipmi_exporter_service_group }}
+WorkingDirectory=/tmp
+ExecStart={{ ipmi_exporter_dest_dir }}/ipmi_exporter
+RestartSec=1
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

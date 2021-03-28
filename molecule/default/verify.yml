@@ -1,0 +1,26 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+  - name: Stat the ipmi_exporter binary
+    stat:
+      path: /usr/local/bin/ipmi_exporter
+    register: __ie_stat
+  - name: Check the ipmi_exporter binary exists
+    assert:
+      that: __ie_stat.stat.exists
+  - name: Check the ipmi_exporter binary is executable
+    assert:
+      that: __ie_stat.stat.executable
+  - name: Check that the ipmi_exporter owner is correct
+    assert:
+      that: __ie_stat.stat.pw_name == "ipmi_exporter"
+  - name: Check service returns http code 200
+    uri:
+      url: http://localhost:9290/metrics
+      return_content: yes
+    register: this
+    failed_when: this.status != 200

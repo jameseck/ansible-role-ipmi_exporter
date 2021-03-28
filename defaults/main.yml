@@ -1,0 +1,10 @@
+---
+ipmi_exporter_dest_dir: /usr/local/bin
+ipmi_exporter_dest_dir_user: root
+ipmi_exporter_dest_dir_group: root
+
+# Change ipmi_exporter_manage_user to yes if you want to use a user other than root
+ipmi_exporter_manage_user: no
+ipmi_exporter_service_user: root
+ipmi_exporter_service_group: root
+ipmi_exporter_version: v1.3.2
